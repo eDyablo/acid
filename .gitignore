@@ -9,3 +9,10 @@ gradle/wrapper/gradle-wrapper.jar
 gradle/wrapper/gradle-wrapper.properties
 gradlew
 gradlew.bat
+
+# Ignore Visual Studio Code files
+bin
+.classpath
+.project
+.settings
+settings.json
