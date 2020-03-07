@@ -5,6 +5,7 @@ plugins {
 
 dependencies {
   compile 'org.codehaus.groovy:groovy:2.5.10'
+  compile 'org.zeromq:jeromq:0.5.2'
   compile project(':actor')
   compile project(':domain')
 }
