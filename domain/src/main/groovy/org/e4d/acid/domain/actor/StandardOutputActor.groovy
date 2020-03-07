@@ -3,8 +3,8 @@ package org.e4d.acid.domain.actor
 import org.e4d.acid.actor.*
 import org.e4d.acid.domain.message.*
 
-class ConsoleDisplayActor extends Actor {
-  ConsoleDisplayActor(ActorSystem system) {
+class StandardOutputActor extends Actor {
+  StandardOutputActor(ActorSystem system) {
     super(system)
     receive(DisplayTextMessage)
   }
