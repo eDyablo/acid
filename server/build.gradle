@@ -1,0 +1,12 @@
+plugins {
+  id 'groovy'
+  id 'application'
+}
+
+dependencies {
+  compile 'org.codehaus.groovy:groovy:2.5.10'
+  compile project(':actor')
+  compile project(':domain')
+}
+
+mainClassName = 'org.e4d.acid.server.Server'
