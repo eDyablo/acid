@@ -13,24 +13,32 @@ class ZmqSocketActor extends Actor {
   ZmqSocketActor(ActorSystem system) {
     super(system)
     receive(
-      ReceiveZmqStringMessage,
-      ZmqStringReceivedMessage,
+      ReceiveZmqTextMessage,
+      SendZmqTextMessage,
     )
   }
 
-  private Socket getSocket(String address) {
-    sockets.get(address) ?: createSocket(address)
-  }
-
-  private Socket createSocket(String address) {
+  private Socket createReplaySocket(String address) {
     final socket = context.createSocket(ZMQ.REP)
     socket.bind(address)
     sockets.put(address, socket)
     return socket
   }
 
-  void handleReceiveZmqStringMessage(message) {
-    final socket = getSocket(message.address)
-    system.send(new ZmqStringReceivedMessage(string: socket.recvStr()))
+  private Socket createRequestSocket(String address) {
+    final socket = context.createSocket(ZMQ.REQ)
+    socket.connect(address)
+    sockets.put(address, socket)
+    return socket
+  }
+
+  void handleReceiveZmqTextMessage(message) {
+    final socket = sockets.get(message.address) ?: createReplaySocket(message.address)
+    final text = new String(socket.recv(0), ZMQ.CHARSET)
+  }
+
+  void handleSendZmqTextMessage(message) {
+    final socket = sockets.get(message.address) ?: createRequestSocket(message.address)
+    socket.send(message.text.getBytes(ZMQ.CHARSET), 0)
   }
 }

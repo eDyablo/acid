@@ -5,9 +5,9 @@ plugins {
 
 dependencies {
   compile 'org.codehaus.groovy:groovy:2.5.10'
-  compile 'org.zeromq:jeromq:0.5.2'
   compile project(':actor')
   compile project(':domain')
+  compile project(':zmq')
 }
 
 mainClassName = 'org.e4d.acid.console.Console'

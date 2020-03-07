@@ -15,7 +15,7 @@ class Server {
     )
     actors.dispatch(
       new DisplayTextMessage(text: 'acid server 1.0.0'),
-      new ReceiveZmqStringMessage(address: 'tcp://*:5555')
+      new ReceiveZmqTextMessage(address: 'tcp://*:5555')
     )
   }
 }
