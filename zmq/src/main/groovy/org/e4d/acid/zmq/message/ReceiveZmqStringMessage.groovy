@@ -1,4 +1,4 @@
-package org.e4d.acid.server.message
+package org.e4d.acid.zmq.message
 
 import groovy.transform.MapConstructor
 

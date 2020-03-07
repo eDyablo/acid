@@ -8,8 +8,9 @@
  */
 
 include 'actor'
+include 'console'
 include 'domain'
 include 'server'
-include 'console'
+include 'zmq'
 
 rootProject.name = 'acid'

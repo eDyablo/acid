@@ -1,7 +1,7 @@
-package org.e4d.acid.server.actor
+package org.e4d.acid.zmq.actor
 
 import org.e4d.acid.actor.*
-import org.e4d.acid.server.message.*
+import org.e4d.acid.zmq.message.*
 import org.zeromq.ZContext
 import org.zeromq.ZMQ
 import org.zeromq.ZMQ.Socket
