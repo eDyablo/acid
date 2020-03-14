@@ -10,4 +10,6 @@ dependencies {
   compile project(':zmq')
 }
 
+version '1.0.0'
+
 mainClassName = 'org.e4d.acid.server.Server'

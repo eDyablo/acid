@@ -16,7 +16,7 @@ class CommandActor extends Actor {
     if (message.command != null && message.command != 'quit') {
       switch(message.command) {
         case 'help':
-          system.send(new DisplayTextMessage(text: '''
+          system.send(new OutputTextMessage(text: '''
           Commands:
             help    Display help information
             quit    Exit the application

@@ -6,16 +6,19 @@ import org.e4d.acid.domain.message.*
 import org.e4d.acid.zmq.actor.*
 import org.e4d.acid.zmq.message.*
 
-class Server {
+class Server extends Actor {
+  Server(ActorSystem system) {
+    super(system)
+  }
+
   static void main(String[] args) {
     final actors = new ActorSystem(
       'server',
       StandardOutputActor,
-      ZmqSocketActor,
+      Server,
     )
     actors.dispatch(
-      new DisplayTextMessage(text: 'acid server 1.0.0'),
-      new ReceiveZmqTextMessage(address: 'tcp://*:5555')
+      new OutputTextMessage(text: "acid ${ actors.name } 1.0.0\n"),
     )
   }
 }

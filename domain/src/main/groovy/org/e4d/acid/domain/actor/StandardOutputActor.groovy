@@ -6,14 +6,14 @@ import org.e4d.acid.domain.message.*
 class StandardOutputActor extends Actor {
   StandardOutputActor(ActorSystem system) {
     super(system)
-    receive(DisplayTextMessage)
+    receive(OutputTextMessage)
   }
 
   PrintStream getOutput() {
     System.out
   }
 
-  void handleDisplayTextMessage(message) {
-    output.println(message.text)
+  void handleOutputTextMessage(message) {
+    output.print(message.text)
   }
 }

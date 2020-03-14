@@ -6,3 +6,5 @@ dependencies {
   compile 'org.codehaus.groovy:groovy:2.5.10'
   compile project(':actor')
 }
+
+version '1.0.0'

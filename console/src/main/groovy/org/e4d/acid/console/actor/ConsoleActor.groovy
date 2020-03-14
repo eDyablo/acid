@@ -9,7 +9,6 @@ class ConsoleActor extends Actor {
     super(actors)
     receive(
       AskForCommandMessage,
-      DisplayTextMessage,
     )
   }
 
@@ -19,10 +18,6 @@ class ConsoleActor extends Actor {
 
   InputStream getInput() {
     System.in
-  }
-
-  void handleDisplayTextMessage(message) {
-    output.println(message.text)
   }
 
   void handleAskForCommandMessage(message) {

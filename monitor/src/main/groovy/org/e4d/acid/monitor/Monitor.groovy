@@ -11,7 +11,7 @@ class Monitor {
       StandardOutputActor,
     )
     actors.dispatch(
-      new DisplayTextMessage(text: "acid ${ actors.name } 1.0.0"),
+      new OutputTextMessage(text: "acid ${ actors.name } 1.0.0\n"),
     )
   }
 }

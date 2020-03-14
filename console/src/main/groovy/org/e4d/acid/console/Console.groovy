@@ -12,14 +12,13 @@ class Console {
   static void main(String[] args) {
     final actors = new ActorSystem(
       'console',
+      StandardOutputActor,
       CommandActor,
       ConsoleActor,
-      ZmqSocketActor,
     )
     actors.dispatch(
-      new DisplayTextMessage(text: 'acid console 1.0.0'),
-      new DisplayTextMessage(text: 'type \'help\''),
-      new SendZmqTextMessage(address: 'tcp://localhost:5555', text: 'hello'),
+      new OutputTextMessage(text: "acid ${ actors.name } 1.0.0\n"),
+      new OutputTextMessage(text: 'type \'help\'\n'),
       new AskForCommandMessage(),
     )
   }

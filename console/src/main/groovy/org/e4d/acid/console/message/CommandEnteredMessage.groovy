@@ -3,6 +3,6 @@ package org.e4d.acid.console.message
 import groovy.transform.MapConstructor
 
 @MapConstructor
-class CommandEnteredMessage {
+class CommandEnteredMessage implements Serializable {
   final String command
 }
