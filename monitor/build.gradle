@@ -1,0 +1,13 @@
+plugins {
+  id 'groovy'
+  id 'application'
+}
+
+dependencies {
+  compile 'org.codehaus.groovy:groovy:2.5.10'
+  compile project(':actor')
+  compile project(':domain')
+  compile project(':zmq')
+}
+
+mainClassName = 'org.e4d.acid.monitor.Monitor'
