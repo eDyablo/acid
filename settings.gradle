@@ -8,6 +8,7 @@
  */
 
 include 'actor'
+include 'broker'
 include 'console'
 include 'domain'
 include 'monitor'

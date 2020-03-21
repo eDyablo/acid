@@ -1,0 +1,13 @@
+plugins {
+  id 'groovy'
+  id 'application'
+}
+
+dependencies {
+  compile 'org.codehaus.groovy:groovy:2.5.10'
+  compile 'org.zeromq:jeromq:0.5.2'
+}
+
+version '1.0.0'
+
+mainClassName = 'org.e4d.acid.broker.Broker'
