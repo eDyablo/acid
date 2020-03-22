@@ -14,6 +14,7 @@ class ZmqActorMessageQueue implements ActorMessageQueue {
   ZmqActorMessageQueue(Map options) {
     incoming = context.createSocket(ZMQ.SUB)
     incoming.connect(options.incoming)
+    incoming.subscribe('')
     outgoing = context.createSocket(ZMQ.PUB)
     outgoing.bind(options.outgoing)
   }
@@ -25,23 +26,31 @@ class ZmqActorMessageQueue implements ActorMessageQueue {
 
   ActorMessage dequeue() {
     println("receiving from ${ incoming }")
-    final parcel = incoming.recv(ZMQ.DONTWAIT)
+    final parcel = incoming.recv(0)
     if (parcel) {
-      println("received ${ parcel.size() } bytes")
+      println("received ${ parcel.size() } bytes of ${ deserialized(parcel) }")
     }
   }
 
   boolean hasMessages() {
     println("asking ${ incoming }")
-    return true
+    true
   }
 
   byte[] serialized(ActorMessage message) {
     new ByteArrayOutputStream().withStream { buffer ->
-      new ObjectOutputStream(buffer).withStream { ostream ->
-        ostream.writeObject(message)
+      new ObjectOutputStream(buffer).withStream { stream ->
+        stream.writeObject(message)
       }
       buffer.toByteArray()
+    }
+  }
+
+  ActorMessage deserialized(byte[] bytes) {
+    new ByteArrayInputStream(bytes).withStream { buffer ->
+      new ObjectInputStream(buffer).withStream { stream ->
+        stream.readObject() as ActorMessage
+      }
     }
   }
 }
