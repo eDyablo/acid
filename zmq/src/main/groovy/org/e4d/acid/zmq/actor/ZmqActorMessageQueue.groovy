@@ -15,8 +15,8 @@ class ZmqActorMessageQueue implements ActorMessageQueue {
     incoming = context.createSocket(ZMQ.SUB)
     incoming.connect(options.incoming)
     incoming.subscribe('')
-    outgoing = context.createSocket(ZMQ.PUB)
-    outgoing.bind(options.outgoing)
+    outgoing = context.createSocket(ZMQ.PUSH)
+    outgoing.connect(options.outgoing)
   }
 
   void enqueue(ActorMessage message) {

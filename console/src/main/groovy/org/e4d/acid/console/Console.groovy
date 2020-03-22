@@ -17,7 +17,7 @@ class Console {
       ConsoleActor,
       queue: new ZmqActorMessageQueue(
         incoming: 'tcp://localhost:6002',
-        outgoing: 'tcp://*:6001',
+        outgoing: 'tcp://localhost:6001',
       )
     )
     actors.dispatch(
