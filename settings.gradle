@@ -13,7 +13,6 @@ include 'console'
 include 'domain'
 include 'monitor'
 include 'server'
-include 'sink'
 include 'zmq'
 
 rootProject.name = 'acid'
