@@ -7,15 +7,17 @@ import org.zeromq.ZThread.IAttachedRunnable
 
 class Listener implements IAttachedRunnable
 {
+  final String prefix = this.class.getPackage().name
+
   @Override
   void run(Object[] args, ZContext ctx, Socket pipe)
   {
     while (true) {
-      ZFrame frame = ZFrame.recvFrame(pipe);
+      ZFrame frame = ZFrame.recvFrame(pipe)
       if (frame == null)
-        break;
-      frame.print(null);
-      frame.destroy();
+        break
+      frame.print(prefix)
+      frame.destroy()
     }
   }
 }
