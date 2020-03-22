@@ -18,7 +18,7 @@ class Broker {
 
   Socket getFrontend() {
     final socket = context.createSocket(ZMQ.XSUB)
-    socket.bind('tcp://localhost:6001')
+    socket.connect('tcp://localhost:6001')
     return socket
   }
 
