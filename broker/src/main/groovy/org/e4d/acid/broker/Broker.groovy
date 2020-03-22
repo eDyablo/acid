@@ -13,14 +13,14 @@ class Broker {
 
   static void main(String[] args) {
     new Broker(
-      incoming: 'tcp://localhost:6003',
+      incoming: 'tcp://*:6001',
       outgoing: 'tcp://*:6002',
     ).run()
   }
 
   Broker(Map options) {
-    incoming = context.createSocket(ZMQ.XSUB)
-    incoming.connect(options.incoming)
+    incoming = context.createSocket(ZMQ.PULL)
+    incoming.bind(options.incoming)
     outgoing = context.createSocket(ZMQ.XPUB)
     outgoing.bind(options.outgoing)
     capture = ZThread.fork(context, new Listener())
