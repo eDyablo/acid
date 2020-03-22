@@ -30,10 +30,6 @@ class ZmqActorMessageQueue implements ActorMessageQueue {
     }
   }
 
-  boolean hasMessages() {
-    true
-  }
-
   byte[] serialized(ActorMessage message) {
     new ByteArrayOutputStream().withStream { buffer ->
       new ObjectOutputStream(buffer).withStream { stream ->

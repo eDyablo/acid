@@ -4,6 +4,4 @@ interface ActorMessageQueue {
   void enqueue(ActorMessage message)
 
   ActorMessage dequeue()
-
-  boolean hasMessages()
 }

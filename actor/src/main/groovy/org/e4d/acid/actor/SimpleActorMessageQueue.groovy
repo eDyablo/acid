@@ -12,8 +12,4 @@ class SimpleActorMessageQueue implements ActorMessageQueue {
   ActorMessage dequeue() {
     queue.poll()
   }
-
-  boolean hasMessages() {
-    queue.size() > 0
-  }
 }

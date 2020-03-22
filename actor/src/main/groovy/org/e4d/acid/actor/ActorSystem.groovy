@@ -21,7 +21,7 @@ class ActorSystem {
 
   void dispatch(Object[] messages) {
     send(messages)
-    while(messageQueue.hasMessages()) {
+    while (true) {
       actors*.send(messageQueue.dequeue())
     }
   }
