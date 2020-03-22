@@ -7,28 +7,26 @@ import org.zeromq.ZThread
 
 class Broker {
   final context = new ZContext()
+  final Socket capture
+  final Socket incoming
+  final Socket outgoing
 
   static void main(String[] args) {
-    new Broker().run()
+    new Broker(
+      incoming: 'tcp://localhost:6001',
+      outgoing: 'tcp://*:6002',
+    ).run()
+  }
+
+  Broker(Map options) {
+    incoming = context.createSocket(ZMQ.XSUB)
+    incoming.connect(options.incoming)
+    outgoing = context.createSocket(ZMQ.XPUB)
+    outgoing.bind(options.outgoing)
+    capture = ZThread.fork(context, new Listener())
   }
 
   void run() {
-    ZMQ.proxy(frontend, backend, capture)
-  }
-
-  Socket getFrontend() {
-    final socket = context.createSocket(ZMQ.XSUB)
-    socket.connect('tcp://localhost:6001')
-    return socket
-  }
-
-  Socket getBackend() {
-    final socket = context.createSocket(ZMQ.XPUB)
-    socket.bind('tcp://*:6002')
-    return socket
-  }
-
-  Socket getCapture() {
-    ZThread.fork(context, new Listener())
+    ZMQ.proxy(incoming, outgoing, capture)
   }
 }
