@@ -7,9 +7,9 @@ import org.zeromq.ZThread
 
 class Broker {
   final context = new ZContext()
-  final Socket capture
-  final Socket incoming
-  final Socket outgoing
+  final Socket capture = ZThread.fork(context, new Listener())
+  final Socket incoming = context.createSocket(ZMQ.PULL)
+  final Socket outgoing = context.createSocket(ZMQ.XPUB)
 
   static void main(String[] args) {
     new Broker(
@@ -19,11 +19,8 @@ class Broker {
   }
 
   Broker(Map options) {
-    incoming = context.createSocket(ZMQ.PULL)
     incoming.bind(options.incoming)
-    outgoing = context.createSocket(ZMQ.XPUB)
     outgoing.bind(options.outgoing)
-    capture = ZThread.fork(context, new Listener())
   }
 
   void run() {

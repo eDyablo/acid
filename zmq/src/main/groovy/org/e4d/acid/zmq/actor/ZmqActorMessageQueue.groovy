@@ -8,14 +8,12 @@ import org.zeromq.ZMQ.Socket
 
 class ZmqActorMessageQueue implements ActorMessageQueue {
   final ZContext context = new ZContext()
-  final Socket incoming
-  final Socket outgoing
+  final Socket incoming = context.createSocket(ZMQ.SUB)
+  final Socket outgoing = context.createSocket(ZMQ.PUSH)
 
   ZmqActorMessageQueue(Map options) {
-    incoming = context.createSocket(ZMQ.SUB)
     incoming.connect(options.incoming)
     incoming.subscribe('')
-    outgoing = context.createSocket(ZMQ.PUSH)
     outgoing.connect(options.outgoing)
   }
 
