@@ -15,6 +15,10 @@ class Console {
       StandardOutputActor,
       CommandActor,
       ConsoleActor,
+      queue: new ZmqActorMessageQueue(
+        incoming: 'tcp://localhost:6002',
+        outgoing: 'tcp://*:6001',
+      )
     )
     actors.dispatch(
       new OutputTextMessage(text: "acid ${ actors.name } 1.0.0\n"),

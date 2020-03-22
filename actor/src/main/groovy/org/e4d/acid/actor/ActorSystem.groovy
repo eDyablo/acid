@@ -3,10 +3,11 @@ package org.e4d.acid.actor
 class ActorSystem {
   final String name
   final List<Actor> actors = []
-  final ActorMessageQueue messageQueue = new SimpleActorMessageQueue()
+  final ActorMessageQueue messageQueue
 
-  ActorSystem(String name, Class[] actorTypes) {
+  ActorSystem(Map options=[:], String name, Class[] actorTypes) {
     this.name = name
+    messageQueue = options.queue ?: new SimpleActorMessageQueue()
     actorTypes.collect(actors) {
       it.newInstance(this)
     }
