@@ -27,6 +27,7 @@ class Broker {
   }
 
   void run() {
+    println('acid broker 1.0.0')
     ZMQ.proxy(incoming, outgoing, capture)
   }
 }
