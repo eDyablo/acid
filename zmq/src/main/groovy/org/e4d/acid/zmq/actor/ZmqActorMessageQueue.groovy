@@ -20,20 +20,17 @@ class ZmqActorMessageQueue implements ActorMessageQueue {
   }
 
   void enqueue(ActorMessage message) {
-    println("sending ${ serialized(message).size() } bytes of ${ message } to ${ outgoing }")
-    outgoing.send(serialized(message), 0)
+    outgoing.send(serialized(message))
   }
 
   ActorMessage dequeue() {
-    println("receiving from ${ incoming }")
     final parcel = incoming.recv(0)
     if (parcel) {
-      println("received ${ parcel.size() } bytes of ${ deserialized(parcel) }")
+      deserialized(parcel)
     }
   }
 
   boolean hasMessages() {
-    println("asking ${ incoming }")
     true
   }
 
