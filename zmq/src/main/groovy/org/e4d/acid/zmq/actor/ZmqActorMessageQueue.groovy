@@ -44,10 +44,14 @@ class ZmqActorMessageQueue implements ActorMessageQueue {
   }
 
   ActorMessage deserialized(byte[] bytes) {
-    new ByteArrayInputStream(bytes).withStream { buffer ->
-      new ObjectInputStream(buffer).withStream { stream ->
-        stream.readObject() as ActorMessage
+    try {
+      new ByteArrayInputStream(bytes).withStream { buffer ->
+        new ObjectInputStream(buffer).withStream { stream ->
+          stream.readObject() as ActorMessage
+        }
       }
+    }
+    catch(ClassNotFoundException) {
     }
   }
 }
