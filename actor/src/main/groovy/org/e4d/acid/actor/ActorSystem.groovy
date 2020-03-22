@@ -1,11 +1,9 @@
 package org.e4d.acid.actor
 
-import java.util.concurrent.LinkedBlockingQueue
-
 class ActorSystem {
   final String name
   final List<Actor> actors = []
-  final Queue messageQueue = new LinkedBlockingQueue()
+  final ActorMessageQueue messageQueue = new SimpleActorMessageQueue()
 
   ActorSystem(String name, Class[] actorTypes) {
     this.name = name
@@ -16,14 +14,14 @@ class ActorSystem {
 
   void send(Object[] messages) {
     messages.each {
-      messageQueue.add(it)
+      messageQueue.enqueue(it)
     }
   }
 
   void dispatch(Object[] messages) {
     send(messages)
-    while(messageQueue.size()) {
-      actors*.send(messageQueue.poll())
+    while(messageQueue.hasMessages()) {
+      actors*.send(messageQueue.dequeue())
     }
   }
 }

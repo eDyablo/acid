@@ -1,6 +1,6 @@
 package org.e4d.acid.actor
 
-class ActorMessage {
+class ActorMessage implements Serializable {
   final String recipient
   final String sender
 }
