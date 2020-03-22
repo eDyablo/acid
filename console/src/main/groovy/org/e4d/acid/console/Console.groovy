@@ -6,7 +6,6 @@ import org.e4d.acid.console.message.*
 import org.e4d.acid.domain.actor.*
 import org.e4d.acid.domain.message.*
 import org.e4d.acid.zmq.actor.*
-import org.e4d.acid.zmq.message.*
 
 class Console {
   static void main(String[] args) {
