@@ -27,7 +27,7 @@ class ActorSelectorTest {
       hasToString(equalTo('*/system/*')))
   }
 
-  @Test void from_text() {
+  @Test void creates_proper_selector_from_text() {
     [
       'namespace/system/actor',
       new ActorSelector(namespace: 'namespace', system: 'system', actor: 'actor'),
