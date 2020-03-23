@@ -18,6 +18,7 @@ class Actor {
 
   void dispatch(ActorMessage[] messages) {
     handle(messages.findAll {
+      selector.fitsTo(ActorSelector.fromText(it.recipient)) &&
       canHandle(it.class)
     })
   }
