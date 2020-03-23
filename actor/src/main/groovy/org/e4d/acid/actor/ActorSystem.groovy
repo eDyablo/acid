@@ -25,4 +25,15 @@ class ActorSystem {
       actors*.dispatch(messageQueue.dequeue())
     }
   }
+
+  ActorSelector getSelector() {
+    new ActorSelector(system: name)
+  }
+
+  ActorMessage message(Map options=[:], Class<?> messageType) {
+    messageType.newInstance(options + [
+      sender: selector,
+      recipient: selector,
+    ])
+  }
 }
