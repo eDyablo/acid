@@ -12,7 +12,7 @@ class Actor {
     messageTypes.collect(this.messageTypes) { it }
   }
 
-  void send(Object[] messages) {
+  void dispatch(Object[] messages) {
     messages.findAll {
       canHandle(it.class)
     }.each {
