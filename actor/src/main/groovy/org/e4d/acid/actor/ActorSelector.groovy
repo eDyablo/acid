@@ -12,7 +12,7 @@ class ActorSelector {
 
   static ActorSelector fromText(String text) {
     final def (String namespace, String system, String actor) =
-      text.split('/') + ['*', '*', '*']
+      (text?.split('/') ?: []) + ['*', '*', '*']
     new ActorSelector(namespace: namespace, system: system, actor: actor)
   }
 

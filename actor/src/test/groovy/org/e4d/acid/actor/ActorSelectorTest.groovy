@@ -40,6 +40,9 @@ class ActorSelectorTest {
 
       '',
       new ActorSelector(namespace: '*', system: '*', actor: '*'),
+
+      null,
+      new ActorSelector(namespace: '*', system: '*', actor: '*'),
     ]
     .collate(2)
     .each { text, selector ->
