@@ -4,6 +4,7 @@ class ActorSystem {
   final String name
   final List<Actor> actors = []
   final ActorMessageQueue messageQueue
+  final ActorSelector selector
 
   ActorSystem(Map options=[:], String name, Class[] actorTypes) {
     this.name = name
@@ -11,6 +12,12 @@ class ActorSystem {
     actorTypes.collect(actors) {
       it.newInstance(this)
     }
+    selector = new ActorSelector(
+      system: [
+        name,
+        Integer.toHexString(System.identityHashCode(this))
+      ].join('-')
+    )
   }
 
   void send(ActorMessage[] messages) {
@@ -24,15 +31,6 @@ class ActorSystem {
     while (true) {
       actors*.dispatch(messageQueue.dequeue())
     }
-  }
-
-  ActorSelector getSelector() {
-    new ActorSelector(
-      system: [
-        name,
-        Integer.toHexString(System.identityHashCode(this))
-      ].join('-')
-    )
   }
 
   ActorMessage selfMessage(Map options=[:], Class<?> messageType) {

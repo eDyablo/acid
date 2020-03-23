@@ -6,20 +6,20 @@ import static org.hamcrest.Matchers.*
 import static org.mockito.Mockito.*
 
 class ActorTest {
-  final system = mock(ActorSystem)
-  final actor = spy(new Actor(system))
+  final system = new ActorSystem('system')
+  final actor = new Actor(system)
 
   @Test void selector_has_system_property_same_as_for_system_selector() {
-    doReturn(new ActorSelector(system: 'system')).when(system).selector
-    assertThat(actor.selector, allOf(
-      hasProperty('system', equalTo('system')),
-    ))
+    assertThat(actor.selector.system, is(equalTo(system.selector.system)))
+  }
+
+  @Test void selector_has_namespace_property_same_as_for_system_selector() {
+    assertThat(actor.selector.namespace,
+      is(equalTo(system.selector.namespace)))
   }
 
   @Test void selector_has_actor_property_equal_to_hex_representation_of_the_actor_hash_code() {
-    doReturn(new ActorSelector(system: 'system')).when(system).selector
-    assertThat(actor.selector, allOf(
-      hasProperty('actor', equalTo(Integer.toHexString(actor.hashCode()))),
-    ))
+    assertThat(actor.selector.actor,
+      is(equalTo(Integer.toHexString(actor.hashCode()))))
   }
 }

@@ -3,9 +3,13 @@ package org.e4d.acid.actor
 class Actor {
   final ActorSystem system
   final List<Class> messageTypes = []
+  final ActorSelector selector
 
   Actor(ActorSystem system) {
     this.system = system
+    selector = system.selector.ofActor(
+      Integer.toHexString(System.identityHashCode(this))
+    )
   }
 
   void receive(Class[] messageTypes) {
@@ -30,11 +34,5 @@ class Actor {
 
   void handle(ActorMessage message) {
     "handle${ message.class.simpleName }"(message)
-  }
-
-  ActorSelector getSelector() {
-    system.selector.ofActor(
-      Integer.toHexString(System.identityHashCode(this))
-    )
   }
 }
