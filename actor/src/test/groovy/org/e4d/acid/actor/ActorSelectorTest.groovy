@@ -26,4 +26,24 @@ class ActorSelectorTest {
     assertThat(new ActorSelector(system: 'system'),
       hasToString(equalTo('*/system/*')))
   }
+
+  @Test void from_text() {
+    [
+      'namespace/system/actor',
+      new ActorSelector(namespace: 'namespace', system: 'system', actor: 'actor'),
+
+      'namespace/system',
+      new ActorSelector(namespace: 'namespace', system: 'system', actor: '*'),
+
+      'namespace',
+      new ActorSelector(namespace: 'namespace', system: '*', actor: '*'),
+
+      '',
+      new ActorSelector(namespace: '*', system: '*', actor: '*'),
+    ]
+    .collate(2)
+    .each { text, selector ->
+      assertThat(ActorSelector.fromText(text), is(equalTo(selector)))
+    }
+  }
 }
