@@ -8,16 +8,16 @@ class ActorSystem {
 
   ActorSystem(Map options=[:], String name, Class[] actorTypes) {
     this.name = name
-    messageQueue = options.queue ?: new SimpleActorMessageQueue()
-    actorTypes.collect(actors) {
-      it.newInstance(this)
-    }
     selector = new ActorSelector(
       system: [
         name,
         Integer.toHexString(System.identityHashCode(this))
       ].join('-')
     )
+    messageQueue = options.queue ?: new SimpleActorMessageQueue()
+    actorTypes.collect(actors) {
+      it.newInstance(this)
+    }
   }
 
   void send(ActorMessage[] messages) {
