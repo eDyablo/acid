@@ -8,6 +8,8 @@ class ActorSelector {
   final String system
   final String actor
 
+  static final String any = '*'
+
   static ActorSelector fromText(String text) {
     final def (String namespace, String system, String actor) =
       text.split('/') + ['*', '*', '*']
@@ -29,5 +31,11 @@ class ActorSelector {
 
   ActorSelector ofActor(String actor) {
     new ActorSelector(namespace: namespace, system: system, actor: actor)
+  }
+
+  boolean fitsTo(ActorSelector other) {
+    (other.namespace == any || namespace == other.namespace) &&
+    (other.system == any || system == other.system) &&
+    (other.actor == any || actor == other.actor)
   }
 }

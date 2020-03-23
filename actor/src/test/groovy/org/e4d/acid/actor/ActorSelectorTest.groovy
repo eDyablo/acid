@@ -46,4 +46,24 @@ class ActorSelectorTest {
       assertThat(ActorSelector.fromText(text), is(equalTo(selector)))
     }
   }
+
+  @Test void fits_to_pattern_selector() {
+    [
+      new ActorSelector(namespace: 'namespace', system: 'system', actor: 'actor'),
+      new ActorSelector(namespace: 'namespace', system: 'system', actor: 'actor'),
+
+      new ActorSelector(namespace: 'namespace', system: 'system', actor: 'actor'),
+      new ActorSelector(namespace: 'namespace', system: 'system'),
+
+      new ActorSelector(namespace: 'namespace', system: 'system', actor: 'actor'),
+      new ActorSelector(namespace: 'namespace'),
+
+      new ActorSelector(namespace: 'namespace', system: 'system', actor: 'actor'),
+      new ActorSelector(),
+    ]
+    .collate(2)
+    .each { selector, pattern ->
+      assert selector.fitsTo(pattern)
+    }
+  }
 }
