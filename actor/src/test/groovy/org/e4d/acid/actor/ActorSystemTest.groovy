@@ -7,10 +7,9 @@ import static org.hamcrest.Matchers.*
 class ActorSystemTest {
   final system = new ActorSystem('system')
 
-  @Test void system_message_has_the_system_as_recipient_and_sender() {
-    final message = system.message(ActorMessage)
+  @Test void system_self_message_has_the_system_as_recipient_and_sender() {
     final String selector = system.selector
-    assertThat(message, allOf(
+    assertThat(system.selfMessage(ActorMessage), allOf(
       hasProperty('sender', equalTo(selector)),
       hasProperty('recipient', equalTo(selector)),
     ))

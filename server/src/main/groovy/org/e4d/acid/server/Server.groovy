@@ -16,7 +16,7 @@ class Server {
       )
     )
     actors.dispatch(
-      actors.message(OutputTextMessage, text: "acid ${ actors.name } 1.0.0\n"),
+      actors.selfMessage(OutputTextMessage, text: "acid ${ actors.name } 1.0.0\n"),
     )
   }
 }

@@ -35,7 +35,7 @@ class ActorSystem {
     )
   }
 
-  ActorMessage message(Map options=[:], Class<?> messageType) {
+  ActorMessage selfMessage(Map options=[:], Class<?> messageType) {
     messageType.newInstance(options + [
       sender: selector,
       recipient: selector,
