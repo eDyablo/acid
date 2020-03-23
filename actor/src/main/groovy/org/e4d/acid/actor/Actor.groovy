@@ -20,7 +20,7 @@ class Actor {
     }
   }
 
-  boolean canHandle(Class<?> type) {
+  boolean canHandle(Class<? extends ActorMessage> type) {
     type in messageTypes
   }
 
