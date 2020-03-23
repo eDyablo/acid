@@ -1,8 +1,9 @@
 package org.e4d.acid.domain.message
 
-import groovy.transform.MapConstructor
+import groovy.transform.*
 import org.e4d.acid.actor.ActorMessage
 
-@MapConstructor
+@MapConstructor(pre={ super(args) })
+@ToString(includeSuperProperties=true)
 class InputTextMessage extends ActorMessage {
 }

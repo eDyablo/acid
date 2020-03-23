@@ -1,9 +1,10 @@
 package org.e4d.acid.console.message
 
-import groovy.transform.MapConstructor
+import groovy.transform.*
 import org.e4d.acid.actor.ActorMessage
 
-@MapConstructor
+@MapConstructor(pre={ super(args) })
+@ToString(includeSuperProperties=true)
 class CommandEnteredMessage extends ActorMessage {
   final String command
 }
