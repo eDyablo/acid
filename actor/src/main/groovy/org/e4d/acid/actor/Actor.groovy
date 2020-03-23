@@ -14,13 +14,17 @@ class Actor {
 
   void send(Object[] messages) {
     messages.findAll {
-      it.class in messageTypes
+      canHandle(it.class)
     }.each {
       handle(it)
     }
   }
 
-  void handle(message) {
+  boolean canHandle(Class<?> type) {
+    type in messageTypes
+  }
+
+  void handle(Object message) {
     "handle${ message.class.simpleName }"(message)
   }
 }
