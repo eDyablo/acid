@@ -16,7 +16,7 @@ class Monitor {
       )
     )
     actors.dispatch(
-      new OutputTextMessage(text: "acid ${ actors.name } 1.0.0\n"),
+      actors.selfMessage(OutputTextMessage, text: "acid ${ actors.name } 1.0.0\n"),
     )
   }
 }
