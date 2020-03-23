@@ -12,19 +12,23 @@ class Actor {
     messageTypes.collect(this.messageTypes) { it }
   }
 
-  void dispatch(Object[] messages) {
-    messages.findAll {
+  void dispatch(ActorMessage[] messages) {
+    handle(messages.findAll {
       canHandle(it.class)
-    }.each {
-      handle(it)
-    }
+    })
   }
 
   boolean canHandle(Class<? extends ActorMessage> type) {
     type in messageTypes
   }
 
-  void handle(Object message) {
+  void handle(List<ActorMessage> messages) {
+    messages.each {
+      handle(it)
+    }
+  }
+
+  void handle(ActorMessage message) {
     "handle${ message.class.simpleName }"(message)
   }
 }

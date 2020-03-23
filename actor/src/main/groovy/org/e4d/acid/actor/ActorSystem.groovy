@@ -13,13 +13,13 @@ class ActorSystem {
     }
   }
 
-  void send(Object[] messages) {
+  void send(ActorMessage[] messages) {
     messages.each {
       messageQueue.enqueue(it)
     }
   }
 
-  void dispatch(Object[] messages) {
+  void dispatch(ActorMessage[] messages) {
     send(messages)
     while (true) {
       actors*.dispatch(messageQueue.dequeue())
