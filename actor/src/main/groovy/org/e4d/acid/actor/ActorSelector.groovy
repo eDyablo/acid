@@ -16,4 +16,8 @@ class ActorSelector {
       it ?: '*'
     }.join('/')
   }
+
+  ActorSelector ofActor(String actor) {
+    new ActorSelector(namespace: namespace, system: system, actor: actor)
+  }
 }

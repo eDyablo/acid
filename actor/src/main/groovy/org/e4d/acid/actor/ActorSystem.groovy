@@ -27,7 +27,12 @@ class ActorSystem {
   }
 
   ActorSelector getSelector() {
-    new ActorSelector(system: name)
+    new ActorSelector(
+      system: [
+        name,
+        Integer.toHexString(System.identityHashCode(this))
+      ].join('-')
+    )
   }
 
   ActorMessage message(Map options=[:], Class<?> messageType) {

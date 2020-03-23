@@ -31,4 +31,10 @@ class Actor {
   void handle(ActorMessage message) {
     "handle${ message.class.simpleName }"(message)
   }
+
+  ActorSelector getSelector() {
+    system.selector.ofActor(
+      Integer.toHexString(System.identityHashCode(this))
+    )
+  }
 }
