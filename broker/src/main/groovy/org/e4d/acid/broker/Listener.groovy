@@ -7,7 +7,7 @@ import org.zeromq.ZThread.IAttachedRunnable
 
 class Listener implements IAttachedRunnable
 {
-  final String prefix = this.class.getPackage().name
+  final String prefix = this.class.package.name
 
   @Override
   void run(Object[] args, ZContext ctx, Socket pipe)
