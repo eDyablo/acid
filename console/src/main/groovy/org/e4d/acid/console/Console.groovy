@@ -22,7 +22,7 @@ class Console {
     actors.dispatch(
       actors.selfMessage(OutputTextMessage, text: "acid ${ actors.name } 1.0.0\n"),
       actors.selfMessage(OutputTextMessage, text: 'type \'help\'\n'),
-      new AskForCommandMessage(),
+      actors.selfMessage(AskForCommandMessage),
     )
   }
 }
